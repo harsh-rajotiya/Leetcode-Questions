@@ -1,26 +1,24 @@
 class Solution {
+
     public int[] sortArrayByParityII(int[] nums) {
-        //Brute force: create a new array and put even element at even index and odd at odd index
+        //using pointers
+        int i = 0;
+        int j = 1;
         int n = nums.length;
-        int[] arr = new int[n];
-        
-        int index = 0;
-        
-        for(int i: nums){
-            if(i % 2 == 0){
-                arr[index] = i;
-                index+=2;
+
+        while (i < n && j < n) {
+            if (i < n && nums[i] % 2 == 0) {
+                i += 2;
+            }
+            if (j < n && nums[j] % 2 == 1) {
+                j += 2;
+            }
+            if (i < n && j < n) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
             }
         }
-        
-        index = 1;
-            for(int i: nums){
-                if(i % 2 == 1){
-                    arr[index] = i;
-                    index+=2;
-                }
-            }
-        
-        return arr;
+        return nums;
     }
 }
