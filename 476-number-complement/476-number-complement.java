@@ -1,15 +1,12 @@
 class Solution {
 
     public int findComplement(int num) {
-        int result = 0;
-        int power = 1;
-
-        while (num > 0) {
-            result += (num % 2 ^ 1) * power;
-            power <<= 1;
-            num >>= 1;
+        int i = 0;
+        int j = 0;
+        while (i < num) {
+            i += Math.pow(2, j);
+            j++;
         }
-
-        return result;
+        return i - num;
     }
 }
