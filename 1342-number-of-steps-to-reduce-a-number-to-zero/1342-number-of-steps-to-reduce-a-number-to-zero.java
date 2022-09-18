@@ -1,16 +1,17 @@
 class Solution {
 
     public int numberOfSteps(int num) {
-        int count = 0;
+        return helper(num, 0);
+    }
 
-        while (num > 0) {
-            if ((num & 1) == 1) {
-                num -= 1;
-            } else {
-                num >>= 1;
-            }
-            count++;
+    public int helper(int n, int count) {
+        if (n == 0) {
+            return count;
         }
-        return count;
+        if (n % 2 == 0) {
+            return helper(n / 2, count + 1);
+        } else {
+            return helper(n - 1, count + 1);
+        }
     }
 }
