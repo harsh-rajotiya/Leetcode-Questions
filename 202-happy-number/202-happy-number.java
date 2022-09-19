@@ -1,16 +1,28 @@
 class Solution {
 
     public boolean isHappy(int n) {
-        Set<Integer> ans = new HashSet<Integer>();
-        while (n != 1 && !ans.contains(n)) {
-            ans.add(n);
-            int sum = 0;
-            while (n > 0) {
-                sum += Math.pow((n % 10), 2);
-                n /= 10;
-            }
-            n = sum;
+        //using linked list concept
+        //fast and slow pointer method
+        int slow = n;
+        int fast = n;
+        do {
+            slow = findSquare(slow);
+            fast = findSquare(findSquare(fast));
+        } while (slow != fast);
+
+        if (slow == 1) {
+            return true;
         }
-        return n == 1;
+        return false;
+    }
+
+    public int findSquare(int number) {
+        int ans = 0;
+        while (number > 0) {
+            int rem = number % 10;
+            ans += rem * rem;
+            number /= 10;
+        }
+        return ans;
     }
 }
